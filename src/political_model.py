@@ -6,7 +6,7 @@ import nltk
 from sentiment_model import SentimentModel
 from candidate_matcher import match_candidate
 
-
+# Comment for pedro 
 class PoliticalModel:
     """
         The PoliticalModel class will combine the outputs of SentimentModel classifaction
