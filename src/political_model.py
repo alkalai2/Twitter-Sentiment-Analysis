@@ -4,9 +4,29 @@ import nltk
 
 # the created sentiment model and candidate matcher
 from sentiment_model import SentimentModel
-from candidate_matcher import match_candidate
+import candidate_matcher
 
-# Comment for pedro 
+# *********** USAGE **************
+#    note: make sure to use in src/ folder
+#
+#         Python 2.7.5 (default, Mar  9 2014, 22:15:05)
+#         [GCC 4.2.1 Compatible Apple LLVM 5.0 (clang-500.0.68)] on darwin
+#         Type "help", "copyright", "credits" or "license" for more information.
+#         >>> from political_model import PoliticalModel
+#         >>> model = PoliticalModel()
+#          training sentiment model ...
+#         >>> model.view("Obama is a terrorist")
+#         {'Candidate': 2, 'Sentiment': 1, 'View': 'Republican'}
+#         >>> view = model.view("McCain should be leading this country")
+#         >>> view
+#         {'Candidate': 1, 'Sentiment': 2, 'View': 'Republican'}
+#         >>> view['Candidate']
+#         1
+#         >>> view['Sentiment']
+#         2
+#         >>> view['View']
+#         'Republican'
+
 class PoliticalModel:
     """
         The PoliticalModel class will combine the outputs of SentimentModel classifaction
@@ -42,7 +62,7 @@ class PoliticalModel:
         sentiment = int(self.sentiment_model.classify(tweet))
 
         # 0 = neither  ,  1 = McCain   , 2 = Obama , 3 = both
-        candidate = match_candidate(tweet)
+        candidate = candidate_matcher.match_candidate(tweet)
 
         view = 'Could not determine'
         if(sentiment > 2 or candidate == 0 or candidate == 3):
@@ -60,7 +80,11 @@ class PoliticalModel:
                 if(candidate == 2):
                     view = 'Democrat'
 
-        print 'Sentiment: ' + repr(sentiment)
-        print 'Candidate: ' + repr(candidate)
-        print 'View: ' + view
-        #return view
+        # return a report of sentiment, candidate, and view
+        report = {}
+        report['Sentiment'] = sentiment
+        report['Candidate'] = candidate
+        report['View'] = view
+
+        # output is of the following : {'Sentiment' : 1, 'Candidate' : 2, 'View' : 'Republican' }
+        return report

@@ -41,16 +41,17 @@ class SentimentModel:
 
     def tokenize_words(self, string):
         # twokenize tokenizer
+        # print 'String : ' + repr(string)
         tokens = tokenize(string)
         output = []
         for t in tokens:
-            if(t[0].isalpha() and len(t)>2):
+            if((t[0].isalpha() or t[0]=='#') and len(t)>2):
                 output.append(t.lower())
         return output
 
     def create_classifier(self):
-        with open('../Data/working_data.csv', 'rU') as data:
-            reader = csv.reader(data, delimiter=',')
+        with open('../Data/debate08_sentiment_tweets.tsv', 'rU') as data:
+            reader = csv.reader(data, dialect=csv.excel_tab)
 
 
             tweets = []
@@ -58,7 +59,7 @@ class SentimentModel:
             for k, row in enumerate(reader):
                 # pick a few tweets randomly
                 sentiment = ''
-                if(k > 1):
+                if(k > 29):
                     #if(int(row[6]) < 3):
                         #words.append(tokenize_words(row[2]))
                     # if(int(row[6]) == 1):
@@ -71,7 +72,7 @@ class SentimentModel:
                     #     sentiment = 'other'
 
                     #create dict of content, ranking#1
-                    tweets.append((self.tokenize_words(row[2]), row[6]))
+                    tweets.append((self.tokenize_words(row[2]), row[5]))
 
                 #
                 # if(k%201==2):
