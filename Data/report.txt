@@ -1,0 +1,28 @@
+ POLITICAL MODEL REPORT 
+ 
+Sentiments
+	 positive : 1019
+	 negative : 1508
+	 mixed : 215
+	 other : 496
+Candidates
+	 obama : 597
+	 mccain : 724
+	 bother : 468
+	 neither : 1449
+Views
+	 democrats : 814
+	 republicans : 363
+	 undecided : 2061
+Accuracy :0.8187152563310686
+	 Correct :2651
+		 positive : 800
+		 negative : 1206
+		 mixed : 205
+		 other : 440
+	 Incorrect :587
+		 positive : 102
+		 negative : 100
+		 mixed : 215
+		 other : 170
+	 Total : 3238
