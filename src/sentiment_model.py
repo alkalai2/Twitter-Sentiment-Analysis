@@ -94,7 +94,11 @@ class SentimentModel:
             self.training_set = nltk.classify.apply_features(self.extract_features, tweets)
             #print training_set[2]
             self.classifier = nltk.NaiveBayesClassifier.train(self.training_set)
-            #print classifier.show_most_informative_features(40)
+            fwordcloud = open('../Data/wordcloud.txt', 'r+')
+            fwordcloud.write(repr(self.classifier.show_most_informative_features(1000)))
+            fwordcloud.close()
+
+
         return self.classifier
 
         ## FOR AFTER CLASSIFIER HAS BEEN CREATED
